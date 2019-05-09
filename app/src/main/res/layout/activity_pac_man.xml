@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gameactivities.PacManActivity">
+
+    <Button
+        android:id="@+id/btnPacManPlaceholder"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnPacManLeft"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Left"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintEnd_toStartOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnPacManPlaceholder" />
+
+    <Button
+        android:id="@+id/btnPacManRight"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Right"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintTop_toTopOf="@+id/btnPacManPlaceholder" />
+
+    <Button
+        android:id="@+id/btnPacManUp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:text="Up"
+        app:layout_constraintBottom_toTopOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintEnd_toEndOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintStart_toStartOf="@+id/btnPacManPlaceholder" />
+
+    <Button
+        android:id="@+id/btnPacManDown"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:text="Down"
+        app:layout_constraintEnd_toEndOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintStart_toStartOf="@+id/btnPacManPlaceholder"
+        app:layout_constraintTop_toBottomOf="@+id/btnPacManPlaceholder" />
+</android.support.constraint.ConstraintLayout>
