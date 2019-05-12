@@ -22,7 +22,8 @@ public class Settings extends AppCompatActivity {
 
         setTitle("Settings");
 
-        connector = (NetworkController) getIntent().getSerializableExtra("NetworkController");
+//        connector = (NetworkController) getIntent().getSerializableExtra("NetworkController");
+        connector = NetworkController.getInstance();
     }
 
     @Override
