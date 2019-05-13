@@ -68,4 +68,27 @@
         app:layout_constraintBottom_toTopOf="@+id/btnTetrisRight"
         app:layout_constraintEnd_toEndOf="@+id/btnTetrisRight"
         app:layout_constraintStart_toStartOf="@+id/btnTetrisRight" />
+
+    <Button
+        android:id="@+id/btnPauseTetris"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="pauseGame"
+        android:text="Pause"
+        app:layout_constraintEnd_toStartOf="@+id/btnTetrisRotateRight"
+        app:layout_constraintStart_toEndOf="@+id/btnTetrisRotateLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTetrisStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Spiel läuft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

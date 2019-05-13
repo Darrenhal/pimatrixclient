@@ -3,6 +3,7 @@ package de.pimatrix.gamecontroller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import de.pimatrix.gamecontroller.backend.NetworkController;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         connectionReset = true;
         txtConnectionStatus = findViewById(R.id.txtConnectionStatus);
+        Log.d("OnResumeTest", "On Create");
 
 //        NetworkController connector = NetworkController.getInstance();
 //        new Thread(connector).start();
@@ -39,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         callingOtherActivity = false;
+        Log.d("OnResumeTest", "äußere OnResume");
         if (connectionReset) {
+            Log.d("OnResumeTest", "innere OnResume");
             NetworkController.resetNetworkController();
             new Thread(NetworkController.getInstance()).start();
         }
@@ -51,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RETURN_TO_MAIN_MENU) {
             onResume();
-        } else if (requestCode == REQEUST_RECONNECT) {}
+        } else if (requestCode == REQEUST_RECONNECT) {
+            onResume();
+        }
         callingOtherActivity = false;
         super.onActivityResult(requestCode, resultCode, data);
     }

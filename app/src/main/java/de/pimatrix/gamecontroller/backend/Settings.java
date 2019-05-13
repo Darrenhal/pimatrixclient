@@ -3,6 +3,7 @@ package de.pimatrix.gamecontroller.backend;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import de.pimatrix.gamecontroller.R;
@@ -11,6 +12,7 @@ public class Settings extends AppCompatActivity {
 
     private NetworkController connector;
     private boolean backPressed;
+    private boolean invokedByOnCreate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +21,15 @@ public class Settings extends AppCompatActivity {
 
         setTitle("Settings");
 
+        invokedByOnCreate = true;
         connector = NetworkController.getInstance();
     }
 
     @Override
     protected void onPause() {
+        Log.d("OnResumeTest", "äußere Settings onPause");
         if (!backPressed) {
+            Log.d("OnResumeTest", "innere Settings onPause");
             new NetworkingTask().execute(new Integer[]{0});
         }
         super.onPause();
@@ -39,10 +44,19 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onResume() {
         backPressed = false;
-        NetworkController.resetNetworkController();
-        new Thread(NetworkController.getInstance()).start();
+        if (!invokedByOnCreate) {
+            NetworkController.resetNetworkController();
+            new Thread(NetworkController.getInstance()).start();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        invokedByOnCreate = false;
         super.onResume();
     }
+
     public void connect(View view) {
         TextView txtSetServerIP = findViewById(R.id.txtSetServerIP);
         TextView txtSetServerPort = findViewById(R.id.txtSetServerPort);
@@ -54,6 +68,7 @@ public class Settings extends AppCompatActivity {
         connector.setServerPort(serverPort);
 
         new Thread(connector).start();
+        onBackPressed();
         finish();
     }
 }

@@ -3,6 +3,10 @@ package de.pimatrix.gamecontroller.gameactivities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import de.pimatrix.gamecontroller.R;
 import de.pimatrix.gamecontroller.backend.NetworkController;
@@ -11,6 +15,7 @@ import de.pimatrix.gamecontroller.backend.NetworkingTask;
 public class TetrisActivity extends AppCompatActivity {
 
     private boolean backPressed;
+    private boolean invokedByOnCreate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,37 +24,49 @@ public class TetrisActivity extends AppCompatActivity {
 
         setTitle("Tetris");
 
-        printToServer(7);
+        invokedByOnCreate = true;
+        printToServer(20);
     }
 
     public void rotateLeft(View view) {
-        printToServer(10);
+        printToServer(23);
     }
 
     public void rotateRight(View view) {
-        printToServer(11);
+        printToServer(24);
     }
 
     public void left(View view) {
-        printToServer(8);
+        printToServer(21);
     }
 
     public void right(View view) {
-        printToServer(9);
+        printToServer(22);
     }
 
     public void boost(View view) {
-        printToServer(12);
+        printToServer(25);
     }
 
-    public void pause(View view) {
-        printToServer(13);
+    public void pauseGame(View view) {
+        TextView txtTetrisStatus = findViewById(R.id.txtTetrisStatus);
+        Button btnPauseTetris = findViewById(R.id.btnPauseTetris);
+
+        if (txtTetrisStatus.getText().toString().equals("Spiel läuft")) {
+            btnPauseTetris.setText("Fortsetzen");
+            txtTetrisStatus.setText("Spiel pausiert");
+            printToServer(13);
+        } else {
+            btnPauseTetris.setText("Pause");
+            txtTetrisStatus.setText("Spiel läuft");
+        }
+        printToServer(26);
     }
 
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(6);
+            printToServer(14);
         } else {
             printToServer(0);
         }
@@ -65,15 +82,18 @@ public class TetrisActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         backPressed = false;
-        NetworkController.resetNetworkController();
-        new Thread(NetworkController.getInstance()).start();
+        if (!invokedByOnCreate) {
+            NetworkController.resetNetworkController();
+            new Thread(NetworkController.getInstance()).start();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            printToServer(7);
+        }
+        invokedByOnCreate = false;
         super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        printToServer(14);
-        super.onDestroy();
     }
 
     private void printToServer(int keyStroke) {

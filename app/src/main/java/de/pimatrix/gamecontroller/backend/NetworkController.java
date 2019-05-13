@@ -1,8 +1,5 @@
 package de.pimatrix.gamecontroller.backend;
 
-import android.app.Activity;
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -12,8 +9,8 @@ import de.pimatrix.gamecontroller.MainActivity;
 
 public class NetworkController implements Runnable, Serializable {
 
-    private String serverIP = "192.168.178.39";
-    private int serverPort = 35000;
+    private static String serverIP = "192.168.178.39";
+    private static int serverPort = 35000;
     private static Socket socket;
     private static NetworkController nc;
 

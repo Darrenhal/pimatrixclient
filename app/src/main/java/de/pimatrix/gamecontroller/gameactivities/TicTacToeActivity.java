@@ -11,6 +11,7 @@ import de.pimatrix.gamecontroller.backend.NetworkingTask;
 public class TicTacToeActivity extends AppCompatActivity {
 
     private boolean backPressed;
+    private boolean invokedByOnCreate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class TicTacToeActivity extends AppCompatActivity {
 
         setTitle("Tic Tac Toe");
 
+        invokedByOnCreate = true;
         printToServer(15);
     }
 
@@ -61,7 +63,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(6);
+            printToServer(25);
         } else {
             printToServer(0);
         }
@@ -77,15 +79,18 @@ public class TicTacToeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         backPressed = false;
-        NetworkController.resetNetworkController();
-        new Thread(NetworkController.getInstance()).start();
+        if (!invokedByOnCreate) {
+            NetworkController.resetNetworkController();
+            new Thread(NetworkController.getInstance()).start();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            printToServer(15);
+        }
+        invokedByOnCreate = false;
         super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        printToServer(25);
-        super.onDestroy();
     }
 
     private void printToServer(int keyStroke) {
