@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import de.pimatrix.gamecontroller.R;
+import de.pimatrix.gamecontroller.backend.NetworkController;
 import de.pimatrix.gamecontroller.backend.NetworkingTask;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
-    private NetworkingTask connector;
+    private boolean backPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,56 +19,77 @@ public class TicTacToeActivity extends AppCompatActivity {
 
         setTitle("Tic Tac Toe");
 
-        connector = (NetworkingTask) getIntent().getSerializableExtra("NetworkController");
-        connector.execute(15);
+        printToServer(15);
     }
 
     public void topLeft(View view) {
-        connector.execute(16);
+        printToServer(16);
     }
 
     public void topMiddle(View view) {
-        connector.execute(17);
+        printToServer(17);
     }
 
     public void topRight(View view) {
-        connector.execute(18);
+        printToServer(18);
     }
 
     public void middleLeft(View view) {
-        connector.execute(19);
+        printToServer(19);
     }
 
     public void middleMiddle(View view) {
-        connector.execute(20);
+        printToServer(20);
     }
 
     public void middleRight(View view) {
-        connector.execute(21);
+        printToServer(21);
     }
 
     public void bottomLeft(View view) {
-        connector.execute(22);
+        printToServer(22);
     }
 
     public void bottomMiddle(View view) {
-        connector.execute(23);
+        printToServer(23);
     }
 
     public void bottomRight(View view) {
-        connector.execute(24);
+        printToServer(24);
     }
 
     @Override
     protected void onPause() {
-        connector.execute(0);
+        if (backPressed) {
+            printToServer(6);
+        } else {
+            printToServer(0);
+        }
         super.onPause();
     }
 
+    @Override
+    public void onBackPressed() {
+        backPressed = true;
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        backPressed = false;
+        NetworkController.resetNetworkController();
+        new Thread(NetworkController.getInstance()).start();
+        super.onResume();
+    }
 
     @Override
     protected void onDestroy() {
-        connector.execute(25);
+        printToServer(25);
         super.onDestroy();
+    }
+
+    private void printToServer(int keyStroke) {
+        NetworkingTask sender = new NetworkingTask();
+        sender.execute(new Integer[]{keyStroke});
     }
 }
