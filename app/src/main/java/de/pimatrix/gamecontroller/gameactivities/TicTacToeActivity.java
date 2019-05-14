@@ -21,49 +21,49 @@ public class TicTacToeActivity extends AppCompatActivity {
         setTitle("Tic Tac Toe");
 
         invokedByOnCreate = true;
-        printToServer(15);
+        printToServer(40);
     }
 
     public void topLeft(View view) {
-        printToServer(16);
+        printToServer(41);
     }
 
     public void topMiddle(View view) {
-        printToServer(17);
+        printToServer(42);
     }
 
     public void topRight(View view) {
-        printToServer(18);
+        printToServer(43);
     }
 
     public void middleLeft(View view) {
-        printToServer(19);
+        printToServer(44);
     }
 
     public void middleMiddle(View view) {
-        printToServer(20);
+        printToServer(45);
     }
 
     public void middleRight(View view) {
-        printToServer(21);
+        printToServer(46);
     }
 
     public void bottomLeft(View view) {
-        printToServer(22);
+        printToServer(47);
     }
 
     public void bottomMiddle(View view) {
-        printToServer(23);
+        printToServer(48);
     }
 
     public void bottomRight(View view) {
-        printToServer(24);
+        printToServer(49);
     }
 
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(25);
+            printToServer(50);
         } else {
             printToServer(0);
         }
@@ -87,7 +87,7 @@ public class TicTacToeActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            printToServer(15);
+            printToServer(40);
         }
         invokedByOnCreate = false;
         super.onResume();
