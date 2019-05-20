@@ -67,7 +67,7 @@ public class TetrisActivity extends AppCompatActivity {
     protected void onPause() {
         if (backPressed) {
             printToServer(14);
-        } else {
+        } else if (NetworkController.isConnected()){
             printToServer(0);
         }
         super.onPause();

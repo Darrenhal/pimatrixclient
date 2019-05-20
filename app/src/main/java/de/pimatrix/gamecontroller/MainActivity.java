@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        if (!callingOtherActivity){
+        if (!callingOtherActivity && NetworkController.isConnected()){
             new NetworkingTask().execute(new Integer[]{0});
             connectionReset = true;
         }

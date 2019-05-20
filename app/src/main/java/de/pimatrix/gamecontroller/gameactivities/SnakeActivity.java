@@ -48,7 +48,7 @@ public class SnakeActivity extends AppCompatActivity {
     protected void onPause() {
         if (backPressed) {
             printToServer(6);
-        } else {
+        } else if (NetworkController.isConnected()){
             printToServer(0);
         }
         super.onPause();

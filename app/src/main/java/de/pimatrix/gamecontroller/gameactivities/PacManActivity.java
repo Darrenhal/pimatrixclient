@@ -6,10 +6,12 @@ import android.view.View;
 
 import de.pimatrix.gamecontroller.R;
 import de.pimatrix.gamecontroller.backend.NetworkController;
+import de.pimatrix.gamecontroller.backend.NetworkingTask;
 
 public class PacManActivity extends AppCompatActivity {
 
     private NetworkController connector;
+    private boolean backPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,22 @@ public class PacManActivity extends AppCompatActivity {
         setTitle("Pac Man");
 
         connector = (NetworkController) getIntent().getSerializableExtra("NetworkController");
+    }
+
+    @Override
+    protected void onPause() {
+        if (backPressed) {
+            printToServer(6);
+        } else if (NetworkController.isConnected()){
+            printToServer(0);
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressed = true;
+        super.onBackPressed();
     }
 
     public void mtrx11(View view) {
@@ -55,5 +73,9 @@ public class PacManActivity extends AppCompatActivity {
 
     public void mtrx33(View view) {
         connector.send(24);
+    }
+
+    private void printToServer(int keyStroke) {
+        new NetworkingTask().execute(new Integer[]{keyStroke});
     }
 }

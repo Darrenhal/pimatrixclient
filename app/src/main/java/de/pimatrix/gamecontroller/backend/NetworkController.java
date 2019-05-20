@@ -13,6 +13,7 @@ public class NetworkController implements Runnable, Serializable {
     private static int serverPort = 35000;
     private static Socket socket;
     private static NetworkController nc;
+    private static boolean connected = false;
 
     private static NetworkController instance;
 
@@ -32,18 +33,23 @@ public class NetworkController implements Runnable, Serializable {
         socket = null;
         try {
             socket = new Socket(serverIP, serverPort);
+            connected = true;
+            new Thread(new KeepAlive(serverIP)).start();
             MainActivity.updateConnection(1);
         } catch (IOException e) {
             MainActivity.updateConnection(0);
+            connected = false;
             e.printStackTrace();
         }
     }
 
     public void send(int keyStroke) {
-        try {
-            OutputStream out = socket.getOutputStream();
-            out.write(keyStroke);
-        } catch (IOException e) {}
+        if (connected) {
+            try {
+                OutputStream out = socket.getOutputStream();
+                out.write(keyStroke);
+            } catch (IOException e) {}
+        }
     }
 
     public static NetworkController getInstance() {
@@ -59,6 +65,14 @@ public class NetworkController implements Runnable, Serializable {
 
     protected void setServerPort(int serverPort) {
         this.serverPort = serverPort;
+    }
+
+    public static boolean isConnected() {
+        return connected;
+    }
+
+    public static void setConnection(boolean connectionUpdate) {
+        connected = connectionUpdate;
     }
 
     public static void resetNetworkController() {

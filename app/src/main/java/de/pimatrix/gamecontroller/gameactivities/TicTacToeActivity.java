@@ -64,7 +64,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     protected void onPause() {
         if (backPressed) {
             printToServer(50);
-        } else {
+        } else if(NetworkController.isConnected()){
             printToServer(0);
         }
         super.onPause();

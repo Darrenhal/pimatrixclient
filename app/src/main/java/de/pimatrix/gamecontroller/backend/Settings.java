@@ -1,6 +1,5 @@
 package de.pimatrix.gamecontroller.backend;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,9 +26,7 @@ public class Settings extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        Log.d("OnResumeTest", "äußere Settings onPause");
-        if (!backPressed) {
-            Log.d("OnResumeTest", "innere Settings onPause");
+        if (!backPressed && NetworkController.isConnected()) {
             new NetworkingTask().execute(new Integer[]{0});
         }
         super.onPause();
