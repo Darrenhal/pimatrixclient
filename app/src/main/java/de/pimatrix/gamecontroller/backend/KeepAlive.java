@@ -40,6 +40,8 @@ public class KeepAlive implements Runnable{
 
                 if (waitingForResponse && keepAlive_waitedCycles == 3) {
                     NetworkController.setConnection(false);
+                } else {
+                    keepAlive_waitedCycles = 0;
                 }
 
             } catch (IOException e) {}
