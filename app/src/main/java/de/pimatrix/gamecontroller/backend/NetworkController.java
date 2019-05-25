@@ -34,7 +34,7 @@ public class NetworkController implements Runnable, Serializable {
         try {
             socket = new Socket(serverIP, serverPort);
             connected = true;
-            new Thread(new KeepAlive(serverIP)).start();
+            //new Thread(new KeepAlive(serverIP)).start();
             MainActivity.updateConnection(1);
         } catch (IOException e) {
             MainActivity.updateConnection(0);

@@ -1,5 +1,7 @@
 package de.pimatrix.gamecontroller.backend;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,6 +14,7 @@ public class KeepAlive implements Runnable{
 
     KeepAlive(String serverIP) {
         int keepAlivePort = 42000;
+        Log.d("KeepAlive-Test", "KeepAlive created");
         try {
             Socket keepAliveSocket = new Socket(serverIP, keepAlivePort);
             out = keepAliveSocket.getOutputStream();
@@ -25,7 +28,10 @@ public class KeepAlive implements Runnable{
         int keepAlive_waitCycles = 3;
         int keepAlive_waitedCycles = 0;
 
+        Log.d("KeepAlive-Test", "KeepAlive running");
+
         while(NetworkController.isConnected()) {
+            Log.d("KeepAlive-Test", "while-loop");
             sleep();
             try {
                 while (waitingForResponse && keepAlive_waitedCycles < keepAlive_waitCycles) {
@@ -36,6 +42,8 @@ public class KeepAlive implements Runnable{
                         keepAlive_waitedCycles++;
                         sleep();
                     }
+
+                    Log.d("KeepAlive-Test", "receiving - cycle: " + keepAlive_waitedCycles);
                 }
 
                 if (waitingForResponse && keepAlive_waitedCycles == 3) {
@@ -51,13 +59,14 @@ public class KeepAlive implements Runnable{
 
                 try {
                     out.write(1);
+                    Log.d("KeepAlive-Test", "sending");
                 } catch (IOException e) {}
             }
         }
     }
 
     private void sleep() {
-        int keepAlive_timeout = 200;
+        int keepAlive_timeout = 3000;
 
         try {
             Thread.sleep(keepAlive_timeout);
