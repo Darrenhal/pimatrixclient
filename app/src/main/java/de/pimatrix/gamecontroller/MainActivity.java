@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity main;
     private boolean callingOtherActivity = false;
     private boolean connectionReset = false;
+    private boolean backPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,20 @@ public class MainActivity extends AppCompatActivity {
             connectionReset = true;
         }
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressed = true;
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (!backPressed) {
+            NetworkController.getInstance().close();
+        }
+        super.onDestroy();
     }
 
     public void playSnake(View view) {

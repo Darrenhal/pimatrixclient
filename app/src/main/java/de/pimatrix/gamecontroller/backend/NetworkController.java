@@ -78,4 +78,10 @@ public class NetworkController implements Runnable, Serializable {
     public static void resetNetworkController() {
         instance = null;
     }
+
+    public void close() {
+        try {
+            socket.close();
+        } catch (IOException e) {}
+    }
 }

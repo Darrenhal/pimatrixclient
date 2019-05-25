@@ -93,6 +93,14 @@ public class TicTacToeActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    @Override
+    protected void onDestroy() {
+        if (!backPressed) {
+            NetworkController.getInstance().close();
+        }
+        super.onDestroy();
+    }
+
     private void printToServer(int keyStroke) {
         NetworkingTask sender = new NetworkingTask();
         sender.execute(new Integer[]{keyStroke});

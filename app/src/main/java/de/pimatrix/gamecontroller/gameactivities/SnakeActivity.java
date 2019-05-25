@@ -55,6 +55,14 @@ public class SnakeActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        if (!backPressed) {
+            NetworkController.getInstance().close();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         backPressed = true;
         super.onBackPressed();
