@@ -10,6 +10,7 @@ import de.pimatrix.gamecontroller.backend.NetworkController;
 import de.pimatrix.gamecontroller.backend.NetworkingTask;
 import de.pimatrix.gamecontroller.backend.Settings;
 import de.pimatrix.gamecontroller.gameactivities.PacManActivity;
+import de.pimatrix.gamecontroller.gameactivities.PongActivity;
 import de.pimatrix.gamecontroller.gameactivities.SnakeActivity;
 import de.pimatrix.gamecontroller.gameactivities.TetrisActivity;
 import de.pimatrix.gamecontroller.gameactivities.TicTacToeActivity;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void playPong(View view) {
         callingOtherActivity = true;
-        Intent startPong = new Intent(this, PacManActivity.class);
+        Intent startPong = new Intent(this, PongActivity.class);
         startActivityForResult(startPong, RETURN_TO_MAIN_MENU);
     }
 

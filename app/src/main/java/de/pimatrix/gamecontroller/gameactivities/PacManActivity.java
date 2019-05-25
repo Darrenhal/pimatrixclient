@@ -10,7 +10,6 @@ import de.pimatrix.gamecontroller.backend.NetworkingTask;
 
 public class PacManActivity extends AppCompatActivity {
 
-    private NetworkController connector;
     private boolean backPressed;
 
     @Override
@@ -20,13 +19,13 @@ public class PacManActivity extends AppCompatActivity {
 
         setTitle("Pac Man");
 
-        connector = (NetworkController) getIntent().getSerializableExtra("NetworkController");
+        printToServer(60);
     }
 
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(6);
+            printToServer(65);
         } else if (NetworkController.isConnected()){
             printToServer(0);
         }
@@ -47,40 +46,20 @@ public class PacManActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void mtrx11(View view) {
-        connector.send(16);
+    public void moveLeft(View view) {
+        printToServer(61);
     }
 
-    public void mtrx21(View view) {
-        connector.send(17);
+    public void moveRight(View view) {
+        printToServer(62);
     }
 
-    public void mtrx31(View view) {
-        connector.send(18);
+    public void moveUp(View view) {
+        printToServer(63);
     }
 
-    public void mtrx12(View view) {
-        connector.send(19);
-    }
-
-    public void mtrx22(View view) {
-        connector.send(20);
-    }
-
-    public void mtrx32(View view) {
-        connector.send(21);
-    }
-
-    public void mtrx13(View view) {
-        connector.send(22);
-    }
-
-    public void mtrx23(View view) {
-        connector.send(23);
-    }
-
-    public void mtrx33(View view) {
-        connector.send(24);
+    public void moveDown(View view) {
+        printToServer(64);
     }
 
     private void printToServer(int keyStroke) {

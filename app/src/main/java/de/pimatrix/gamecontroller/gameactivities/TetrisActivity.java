@@ -28,20 +28,20 @@ public class TetrisActivity extends AppCompatActivity {
         printToServer(20);
     }
 
-    public void rotateLeft(View view) {
-        printToServer(23);
-    }
-
-    public void rotateRight(View view) {
-        printToServer(24);
-    }
-
     public void left(View view) {
         printToServer(21);
     }
 
     public void right(View view) {
         printToServer(22);
+    }
+
+    public void rotateLeft(View view) {
+        printToServer(23);
+    }
+
+    public void rotateRight(View view) {
+        printToServer(24);
     }
 
     public void boost(View view) {
@@ -66,7 +66,7 @@ public class TetrisActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(14);
+            printToServer(27);
         } else if (NetworkController.isConnected()){
             printToServer(0);
         }
