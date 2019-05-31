@@ -60,10 +60,14 @@ public class TicTacToeActivity extends AppCompatActivity {
         printToServer(49);
     }
 
+    public void resetGame(View view) {
+        printToServer(50);
+    }
+
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(50);
+            printToServer(51);
         } else if(NetworkController.isConnected()){
             printToServer(0);
         }
