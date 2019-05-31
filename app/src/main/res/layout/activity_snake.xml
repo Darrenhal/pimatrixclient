@@ -85,4 +85,85 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnSnakeBoost"
         app:layout_constraintTop_toTopOf="@+id/btnSnakeBoost" />
+
+    <Button
+        android:id="@+id/btnUpperInvisSnakeLeft"
+        android:layout_width="100dp"
+        android:layout_height="62dp"
+        android:onClick="left"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnSnakeLeft"
+        app:layout_constraintEnd_toEndOf="@+id/btnSnakeLeft"
+        app:layout_constraintStart_toStartOf="@+id/btnSnakeLeft" />
+
+    <Button
+        android:id="@+id/btnLowerInvisSnakeLeft"
+        android:layout_width="100dp"
+        android:layout_height="62dp"
+        android:onClick="left"
+        android:text="Button"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btnSnakeLeft"
+        app:layout_constraintStart_toStartOf="@+id/btnSnakeLeft"
+        app:layout_constraintTop_toBottomOf="@+id/btnSnakeLeft" />
+
+    <Button
+        android:id="@+id/btnLeftInvisSnakeDown"
+        android:layout_width="100"
+        android:layout_height="90dp"
+        android:onClick="down"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSnakeDown"
+        app:layout_constraintEnd_toStartOf="@+id/btnSnakeDown" />
+
+    <Button
+        android:id="@+id/btnRightInvisSnakeDown"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:onClick="down"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSnakeDown"
+        app:layout_constraintStart_toEndOf="@+id/btnSnakeDown" />
+
+    <Button
+        android:id="@+id/btnLowerInvisSnakeRight"
+        android:layout_width="100dp"
+        android:layout_height="62dp"
+        android:onClick="right"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btnSnakeRight"
+        app:layout_constraintStart_toStartOf="@+id/btnSnakeRight"
+        app:layout_constraintTop_toBottomOf="@+id/btnSnakeRight" />
+
+    <Button
+        android:id="@+id/btnUpperInvisSnakeRight"
+        android:layout_width="100dp"
+        android:layout_height="62dp"
+        android:onClick="right"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnSnakeRight"
+        app:layout_constraintEnd_toEndOf="@+id/btnSnakeRight"
+        app:layout_constraintStart_toStartOf="@+id/btnSnakeRight" />
+
+    <Button
+        android:id="@+id/btnLeftInvisSnakeUp"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:onClick="up"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSnakeUp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSnakeUp"
+        app:layout_constraintTop_toTopOf="@+id/btnSnakeUp"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/btnRightInvisSnakeUp"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:onClick="up"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSnakeUp"
+        app:layout_constraintStart_toEndOf="@+id/btnSnakeUp"
+        app:layout_constraintTop_toTopOf="@+id/btnSnakeUp"
+        app:layout_constraintVertical_bias="0.25" />
 </android.support.constraint.ConstraintLayout>
