@@ -44,10 +44,12 @@ public class SnakeActivity extends AppCompatActivity {
         printToServer(5);
     }
 
+    public void restart(View view) { printToServer(6); }
+
     @Override
     protected void onPause() {
         if (backPressed) {
-            printToServer(6);
+            printToServer(7);
         } else if (NetworkController.isConnected()){
             printToServer(0);
         }

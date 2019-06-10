@@ -54,6 +54,10 @@ public class Settings extends AppCompatActivity {
         super.onResume();
     }
 
+    public void resetServer(View view) {
+        new NetworkingTask().execute(101);
+    }
+
     public void connect(View view) {
         TextView txtSetServerIP = findViewById(R.id.txtSetServerIP);
         TextView txtSetServerPort = findViewById(R.id.txtSetServerPort);
